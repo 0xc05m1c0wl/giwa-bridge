@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.node.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "types": ["vite/client", "@testing-library/jest-dom", "vitest/globals"],
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@lib/*": ["src/lib/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@ui/*": ["src/ui/*"],
+      "@components/*": ["src/components/*"]
+    }
+  },
+  "include": ["src", "test"]
+  ,
+  "exclude": [
+    "src/__tests__",
+    "test",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
+}

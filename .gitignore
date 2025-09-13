@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.vite/
+
+# build reports
+stats.html
+vite-stats.html
+
+# typescript
+*.tsbuildinfo
+
+# env files
+.env*
+
+# tests/coverage
+coverage/
+
+# system files
+.DS_Store
+
+# pnpm store
+.pnpm-store/

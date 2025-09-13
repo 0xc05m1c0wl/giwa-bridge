@@ -1,0 +1,84 @@
+name: "Pages: Build and Deploy"
+run-name: "Pages Deploy • ${{ github.ref_name }}"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Set RPC env (branch-aware)
+        env:
+          VITE_RPC_L1: ${{ secrets.VITE_RPC_L1 }}
+          VITE_RPC_L1_PROD: ${{ secrets.VITE_RPC_L1_PROD }}
+          VITE_RPC_L2: ${{ secrets.VITE_RPC_L2 }}
+          VITE_RPC_L2_PROD: ${{ secrets.VITE_RPC_L2_PROD }}
+          DEFAULT_VITE_RPC_L1: https://ethereum-sepolia.publicnode.com
+          DEFAULT_VITE_RPC_L2: https://sepolia-rpc.giwa.io
+        run: |
+          L1="${VITE_RPC_L1:-$DEFAULT_VITE_RPC_L1}"
+          L2="${VITE_RPC_L2:-$DEFAULT_VITE_RPC_L2}"
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            L1="${VITE_RPC_L1_PROD:-$L1}"
+            L2="${VITE_RPC_L2_PROD:-$L2}"
+          fi
+          echo "VITE_RPC_L1=$L1" >> $GITHUB_ENV
+          echo "VITE_RPC_L2=$L2" >> $GITHUB_ENV
+
+      - name: Show effective RPC endpoints (masked)
+        run: |
+          mask() { u="$1"; proto="${u%%://*}"; rest="${u#*://}"; host="${rest%%/*}"; echo "$proto://$host"; }
+          echo "L1 endpoint: $(mask "$VITE_RPC_L1")"
+          echo "L2 endpoint: $(mask "$VITE_RPC_L2")"
+
+      - name: Build
+        env:
+          BASE_URL: /${{ github.event.repository.name }}/
+        run: pnpm build
+
+      - name: SPA fallback (404.html)
+        run: cp dist/index.html dist/404.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
