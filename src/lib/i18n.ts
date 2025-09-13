@@ -94,6 +94,7 @@ const ko: Dict = {
   network_label: '네트워크',
   disconnect: '연결 해제',
   open_giwa_faucet: 'GIWA Faucet 열기',
+  footer_open_source: '이 프로젝트는 오픈소스입니다',
 };
 
 const en: Dict = {
@@ -191,6 +192,7 @@ const en: Dict = {
   network_label: 'Network',
   disconnect: 'Disconnect',
   open_giwa_faucet: 'Open GIWA Faucet',
+  footer_open_source: 'This project is open source',
 };
 
 const dicts = { ko, en };

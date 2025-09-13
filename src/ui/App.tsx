@@ -66,6 +66,17 @@ export function App() {
           <AppRoutes />
         </section>
       </div>
+      <footer className="mt-10 text-xs text-slate-500 dark:text-slate-400">
+        {t('footer_open_source')} ·{' '}
+        <a
+          href="https://github.com/0xc05m1c0wl/giwa-bridge"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-slate-700 dark:hover:text-slate-200"
+        >
+          GitHub
+        </a>
+      </footer>
     </Container>
   );
 }
