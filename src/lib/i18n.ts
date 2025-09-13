@@ -198,8 +198,32 @@ const en: Dict = {
 const dicts = { ko, en };
 
 type Locale = keyof typeof dicts;
+function detectBrowserLocale(): Locale {
+  try {
+    type NavLike = { languages?: readonly string[]; language?: string };
+    const langs: readonly string[] = (() => {
+      if (typeof navigator === 'undefined') return [] as const;
+      const n = (navigator as unknown as NavLike) || {};
+
+      if (Array.isArray(n.languages) && n.languages.length > 0) return n.languages;
+      if (n.language) return [n.language];
+
+      return [] as const;
+    })();
+
+    for (const raw of langs) {
+      const l = String(raw || '').toLowerCase();
+
+      if (l.startsWith('ko')) return 'ko';
+    }
+  } catch {}
+
+  return 'en';
+}
+
 let current: Locale =
-  (typeof localStorage !== 'undefined' && (localStorage.getItem('locale') as Locale)) || 'ko';
+  (typeof localStorage !== 'undefined' && (localStorage.getItem('locale') as Locale)) ||
+  detectBrowserLocale();
 
 export function setLocale(l: Locale) {
   current = l;

@@ -1,5 +1,4 @@
 function isProd(): boolean {
-
   const meta = import.meta as unknown as { env?: { PROD?: boolean } };
 
   return Boolean(meta?.env?.PROD);
@@ -25,7 +24,6 @@ function dntEnabled(): boolean {
 }
 
 function hasOptOut(): boolean {
-
   const href = typeof window !== 'undefined' ? window.location?.href : '';
 
   if (href) {
