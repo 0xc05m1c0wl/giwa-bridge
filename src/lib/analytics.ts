@@ -50,16 +50,45 @@ function hasOptOut(): boolean {
 }
 
 export function initAnalytics(): void {
-  if (typeof document === 'undefined') return;
-  if (!isProd()) return;
-  if (dntEnabled()) return;
-  if (hasOptOut()) return;
+  const debug = isDebug();
+
+  if (typeof document === 'undefined') {
+    if (debug) console.info('[analytics] skip: no document');
+
+    return;
+  }
+
+  if (!isProd()) {
+    if (debug) console.info('[analytics] skip: not production');
+
+    return;
+  }
+
+  if (dntEnabled()) {
+    if (debug) console.info('[analytics] skip: DNT enabled');
+
+    return;
+  }
+
+  if (hasOptOut()) {
+    if (debug) console.info('[analytics] skip: user opt-out');
+
+    return;
+  }
 
   const token = getToken();
 
-  if (!token) return;
+  if (!token) {
+    if (debug) console.info('[analytics] skip: missing token');
 
-  if (document.querySelector('script[data-cf-beacon]')) return;
+    return;
+  }
+
+  if (document.querySelector('script[data-cf-beacon]')) {
+    if (debug) console.info('[analytics] skip: script already present');
+
+    return;
+  }
 
   const s = document.createElement('script');
 
@@ -67,4 +96,29 @@ export function initAnalytics(): void {
   s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
   s.setAttribute('data-cf-beacon', JSON.stringify({ token }));
   document.head.appendChild(s);
+  if (debug) console.info('[analytics] loaded Cloudflare beacon');
+}
+
+function isDebug(): boolean {
+  const href = typeof window !== 'undefined' ? window.location?.href : '';
+
+  if (href) {
+    try {
+      const u = new URL(href);
+
+      if (u.searchParams.get('analytics-debug') === '1') {
+        try {
+          localStorage.setItem('analytics_debug', '1');
+        } catch {}
+
+        return true;
+      }
+    } catch {}
+  }
+
+  try {
+    return typeof localStorage !== 'undefined' && localStorage.getItem('analytics_debug') === '1';
+  } catch {
+    return false;
+  }
 }

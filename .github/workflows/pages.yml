@@ -63,6 +63,14 @@ jobs:
         run: |
           echo "VITE_CF_BEACON_TOKEN=${{ secrets.CF_BEACON_TOKEN }}" >> $GITHUB_ENV
 
+      - name: Show analytics env (masked)
+        run: |
+          if [ -n "$VITE_CF_BEACON_TOKEN" ]; then
+            echo "CF beacon token: present"
+          else
+            echo "CF beacon token: missing"
+          fi
+
       - name: Build
         env:
           BASE_URL: /${{ github.event.repository.name }}/
