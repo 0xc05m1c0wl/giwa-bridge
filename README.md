@@ -1,7 +1,7 @@
 # Giwa Bridge Web
 
 [![CI](https://img.shields.io/badge/ci-manual-lightgrey?logo=githubactions)](https://github.com/0xc05m1c0wl/giwa-bridge/actions/workflows/ci.yml)
-[![coverage](https://img.shields.io/badge/coverage-pending-lightgrey?logo=codecov)](https://codecov.io/gh/0xc05m1c0wl/giwa-bridge)
+[![codecov](https://codecov.io/gh/0xc05m1c0wl/giwa-bridge/branch/main/graph/badge.svg?token=YS2GJBVDY0)](https://codecov.io/gh/0xc05m1c0wl/giwa-bridge)
 [![Release](https://img.shields.io/badge/release-v0.1.0-blue)](https://github.com/0xc05m1c0wl/giwa-bridge/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2F0xc05m1c0wl.github.io%2Fgiwa-bridge%2F)](https://0xc05m1c0wl.github.io/giwa-bridge/)
