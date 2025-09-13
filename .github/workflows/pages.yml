@@ -59,6 +59,10 @@ jobs:
           echo "L1 endpoint: $(mask "$VITE_RPC_L1")"
           echo "L2 endpoint: $(mask "$VITE_RPC_L2")"
 
+      - name: Set Cloudflare beacon token
+        run: |
+          echo "VITE_CF_BEACON_TOKEN=${{ secrets.CF_BEACON_TOKEN }}" >> $GITHUB_ENV
+
       - name: Build
         env:
           BASE_URL: /${{ github.event.repository.name }}/

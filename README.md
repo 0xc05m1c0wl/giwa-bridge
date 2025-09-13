@@ -59,6 +59,16 @@ Set environment variables via `.env` or CI. Sensible defaults work out of the bo
 - GitHub Actions: lint, typecheck, test, GitHub Pages deploy
 - Codecov upload (token via GitHub Secrets)
 
+## Analytics (Cloudflare Web Analytics)
+
+- Production builds may enable privacy-friendly Cloudflare Web Analytics.
+- Privacy:
+  - Do Not Track (DNT) respected.
+  - Opt-out: add `?no-analytics=1` once (stored in `localStorage`), or set `localStorage.no_analytics = '1'`.
+- Configuration:
+  - `VITE_CF_BEACON_TOKEN` is injected by CI from repo secret `CF_BEACON_TOKEN`.
+- No wallet addresses, hashes, or PII are sent by this app.
+
 ## License
 
 MIT License. See `LICENSE` for details.
