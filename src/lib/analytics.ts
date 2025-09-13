@@ -1,16 +1,3 @@
-function isProd(): boolean {
-  const meta = import.meta as unknown as { env?: { PROD?: boolean } };
-
-  return Boolean(meta?.env?.PROD);
-}
-
-function getToken(): string | undefined {
-  const meta = import.meta as unknown as { env?: { VITE_CF_BEACON_TOKEN?: string } };
-  const t = meta?.env?.VITE_CF_BEACON_TOKEN || '';
-
-  return t || undefined;
-}
-
 function dntEnabled(): boolean {
   if (typeof navigator === 'undefined') return false;
   const nav = navigator as unknown as {
@@ -51,39 +38,39 @@ export function initAnalytics(): void {
   const debug = isDebug();
 
   if (typeof document === 'undefined') {
-    if (debug) console.info('[analytics] skip: no document');
+    if (debug) console.warn('[analytics] skip: no document');
 
     return;
   }
 
-  if (!isProd()) {
-    if (debug) console.info('[analytics] skip: not production');
+  if (!import.meta.env.PROD) {
+    if (debug) console.warn('[analytics] skip: not production');
 
     return;
   }
 
   if (dntEnabled()) {
-    if (debug) console.info('[analytics] skip: DNT enabled');
+    if (debug) console.warn('[analytics] skip: DNT enabled');
 
     return;
   }
 
   if (hasOptOut()) {
-    if (debug) console.info('[analytics] skip: user opt-out');
+    if (debug) console.warn('[analytics] skip: user opt-out');
 
     return;
   }
 
-  const token = getToken();
+  const token = import.meta.env.VITE_CF_BEACON_TOKEN as string | undefined;
 
   if (!token) {
-    if (debug) console.info('[analytics] skip: missing token');
+    if (debug) console.warn('[analytics] skip: missing token');
 
     return;
   }
 
   if (document.querySelector('script[data-cf-beacon]')) {
-    if (debug) console.info('[analytics] skip: script already present');
+    if (debug) console.warn('[analytics] skip: script already present');
 
     return;
   }
@@ -94,7 +81,7 @@ export function initAnalytics(): void {
   s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
   s.setAttribute('data-cf-beacon', JSON.stringify({ token }));
   document.head.appendChild(s);
-  if (debug) console.info('[analytics] loaded Cloudflare beacon');
+  if (debug) console.warn('[analytics] loaded Cloudflare beacon');
 }
 
 function isDebug(): boolean {
