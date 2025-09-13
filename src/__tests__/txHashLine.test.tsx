@@ -12,7 +12,7 @@ describe('TxHashLine', () => {
     global.navigator.clipboard = { writeText: vi.fn() };
   });
 
-  it('renders label and explorer link', () => {
+  it('should render label and explorer link', () => {
     render(<TxHashLine label="L1 Tx" hash={H} explorerBase="https://explorer" />);
     expect(screen.getByText('L1 Tx')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: t('view_on_etherscan') })).toHaveAttribute(
@@ -21,7 +21,7 @@ describe('TxHashLine', () => {
     );
   });
 
-  it('copies hash to clipboard', async () => {
+  it('should copy hash to clipboard', async () => {
     render(<TxHashLine hash={H} />);
     await userEvent.click(screen.getByRole('button', { name: t('copy') }));
     expect(navigator.clipboard.writeText).toHaveBeenCalled();

@@ -34,13 +34,13 @@ describe('routes prefetch', () => {
     (globalThis as any).__import_counter = 0;
   });
 
-  it('prefetchRoute directly triggers module import', async () => {
+  it('should directly trigger module import (prefetchRoute)', async () => {
     await prefetchRoute('home');
     // @ts-expect-error test global
     expect((globalThis as any).__import_counter).toBeGreaterThan(0);
   });
 
-  it('prefetchIfNeeded schedules only once (dedup)', async () => {
+  it('should schedule only once (prefetchIfNeeded, dedup)', async () => {
     await prefetchIfNeeded('home');
     await prefetchIfNeeded('home');
 

@@ -8,7 +8,7 @@ import { WagmiProvider } from 'wagmi';
 import { wagmiConfig } from '@/wagmi';
 
 describe('App', () => {
-  it('renders headings and buttons', () => {
+  it('should render headings and buttons', () => {
     const qc = new QueryClient();
 
     render(

@@ -32,7 +32,7 @@ describe('Withdraw UI', () => {
     localStorage.clear();
   });
 
-  it('입력 유효성/잔액/연결 상태에 따른 버튼 비활성화', async () => {
+  it('should disable button based on input validity, balance, and connection', async () => {
     renderWithProviders(<Withdraw />);
 
     const btn = await screen.findByRole('button', { name: t('withdraw') });
@@ -46,7 +46,7 @@ describe('Withdraw UI', () => {
     expect(await screen.findByText('숫자 형식 아님')).toBeInTheDocument();
   });
 
-  it('정상 클릭 시 run 호출 및 해시 저장', async () => {
+  it('should call run and save hash on valid click', async () => {
     renderWithProviders(<Withdraw />);
     const btn = await screen.findByRole('button', { name: t('withdraw') });
 

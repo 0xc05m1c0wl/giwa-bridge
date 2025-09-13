@@ -2,7 +2,7 @@ import { gtZero, isNumeric } from '@lib/validation';
 import { describe, expect, it } from 'vitest';
 
 describe('validation utils', () => {
-  it('isNumeric allows ints/decimals', () => {
+  it('should allow ints/decimals (isNumeric)', () => {
     expect(isNumeric('')).toBe(true);
     expect(isNumeric('0')).toBe(true);
     expect(isNumeric('1.23')).toBe(true);
@@ -10,7 +10,7 @@ describe('validation utils', () => {
     expect(isNumeric('1.')).toBe(true);
     expect(isNumeric('a')).toBe(false);
   });
-  it('gtZero requires positive', () => {
+  it('should require positive (gtZero)', () => {
     expect(gtZero('0')).toBe(false);
     expect(gtZero('0.0')).toBe(false);
     expect(gtZero('0.0001')).toBe(true);

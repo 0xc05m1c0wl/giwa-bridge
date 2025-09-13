@@ -22,7 +22,7 @@ function Probe({ target }: { target: number }) {
 }
 
 describe('useEnsureChain', () => {
-  it('체인 불일치 시 switchChain 호출', async () => {
+  it('should call switchChain on chain mismatch', async () => {
     render(<Probe target={11155111} />);
     await userEvent.click(screen.getByRole('button', { name: 'ensure' }));
     expect(switchChain).toHaveBeenCalledWith({ chainId: 11155111 });

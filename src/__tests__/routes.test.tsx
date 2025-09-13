@@ -8,7 +8,7 @@ import { WagmiProvider } from 'wagmi';
 import { wagmiConfig } from '@/wagmi';
 
 describe('routes', () => {
-  it('renders home route and balance notice when disconnected', async () => {
+  it('should render home route and balance notice when disconnected', async () => {
     const qc = new QueryClient();
 
     render(

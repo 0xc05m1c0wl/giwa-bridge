@@ -28,7 +28,7 @@ vi.mock('wagmi', async (importOriginal) => {
 });
 
 describe('Balances UI', () => {
-  it('연결 시 잔액/토큰/허용량 표시 및 Faucet 버튼 동작', async () => {
+  it('should show balances/tokens/allowance and faucet actions when connected', async () => {
     renderWithProviders(<Balances />);
     expect(await screen.findByText(/ETH L1:/)).toBeInTheDocument();
     expect(await screen.findByText(/ETH L2:/)).toBeInTheDocument();

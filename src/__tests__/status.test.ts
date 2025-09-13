@@ -2,7 +2,7 @@ import { isBusyCode, isBusyFlow } from '@lib/status';
 import { describe, expect, it } from 'vitest';
 
 describe('status utils', () => {
-  it('isBusyCode reflects deposit/withdraw steps', () => {
+  it('should reflect deposit/withdraw steps (isBusyCode)', () => {
     expect(isBusyCode('idle')).toBe(false);
     expect(isBusyCode('approving')).toBe(true);
     expect(isBusyCode('depositing')).toBe(true);
@@ -12,7 +12,7 @@ describe('status utils', () => {
     expect(isBusyCode('error')).toBe(false);
   });
 
-  it('isBusyFlow reflects withdraw flow steps', () => {
+  it('should reflect withdraw flow steps (isBusyFlow)', () => {
     expect(isBusyFlow('idle')).toBe(false);
     expect(isBusyFlow('checking_l2_receipt')).toBe(true);
     expect(isBusyFlow('waiting_provable')).toBe(true);

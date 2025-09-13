@@ -23,7 +23,7 @@ vi.mock('wagmi', async (importOriginal) => {
 });
 
 describe('Deposit UI', () => {
-  it('유효 금액 + 잔액 충분 시 버튼 활성 및 run 호출', async () => {
+  it('should enable button and call run for valid amount and sufficient balance', async () => {
     renderWithProviders(<Deposit />);
     const btn = await screen.findByRole('button', { name: t('approve_deposit') });
 
@@ -32,7 +32,7 @@ describe('Deposit UI', () => {
     expect(run).toHaveBeenCalled();
   });
 
-  it('잘못된 금액 입력 시 힌트 노출', async () => {
+  it('should show hint for invalid amount input', async () => {
     renderWithProviders(<Deposit />);
     const input = screen.getByLabelText('amount');
 

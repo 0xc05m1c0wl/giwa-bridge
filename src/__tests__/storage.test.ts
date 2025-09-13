@@ -6,7 +6,7 @@ describe('storage utils', () => {
     localStorage.clear();
   });
 
-  it('persists and loads last withdrawal hash', () => {
+  it('should persist and load last withdrawal hash', () => {
     expect(getLastWithdrawalHash()).toBe('');
     setLastWithdrawalHash('0xabc');
     expect(getLastWithdrawalHash()).toBe('0xabc');

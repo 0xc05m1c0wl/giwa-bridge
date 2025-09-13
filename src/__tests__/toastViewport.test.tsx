@@ -4,7 +4,7 @@ import { ToastViewport } from '@ui/ToastViewport';
 import { describe, expect, it, vi } from 'vitest';
 
 describe('ToastViewport', () => {
-  it('구독(setup) 호출 스모크 테스트', () => {
+  it('should call setup subscription (smoke)', () => {
     const sub = vi.spyOn(toaster, 'subscribe');
 
     render(<ToastViewport />);

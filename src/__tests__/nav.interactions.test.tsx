@@ -18,7 +18,7 @@ vi.mock('wagmi', async (importOriginal) => {
 });
 
 describe('Navigation interactions', () => {
-  it('NavTabs에서 ERC-20 입금 탭 클릭 시 /deposit로 이동', async () => {
+  it('should navigate to /deposit when clicking ERC-20 deposit tab in NavTabs', async () => {
     renderWithProviders(<App />);
     await userEvent.click(screen.getByRole('tab', { name: t('nav_token_deposit') }));
     expect(await screen.findByText(t('title_deposit_erc20'))).toBeInTheDocument();

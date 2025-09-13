@@ -76,7 +76,7 @@ describe('useBridge', () => {
     callCount = 0;
   });
 
-  it('deposit: approve + deposit → waiting_l2 → completed', async () => {
+  it('should run deposit flow: approve + deposit → waiting_l2 → completed', async () => {
     l1Public.readContract.mockResolvedValueOnce(0n);
 
     l1Public.waitForTransactionReceipt.mockResolvedValueOnce({});
@@ -96,7 +96,7 @@ describe('useBridge', () => {
     expect(screen.getByLabelText('l2').textContent).toMatch(/^0x/);
   });
 
-  it('withdraw: withdrawTo → saved', async () => {
+  it('should run withdraw flow: withdrawTo → saved', async () => {
     writeContractAsync.mockResolvedValueOnce('0x'.padEnd(66, 'c'));
     render(<WithdrawProbe />);
     await userEvent.click(screen.getByLabelText('runw'));

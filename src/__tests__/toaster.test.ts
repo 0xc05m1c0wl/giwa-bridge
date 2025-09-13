@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { toaster } from '../lib/toaster';
 
 describe('toaster', () => {
-  it('subscribes and emits', () => {
+  it('should subscribe and emit', () => {
     const seen: string[] = [];
     const unsub = toaster.subscribe((t) => seen.push(`${t.type}:${t.message}`));
 

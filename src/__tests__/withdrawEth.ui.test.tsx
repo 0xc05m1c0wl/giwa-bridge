@@ -28,7 +28,7 @@ vi.mock('wagmi', async (importOriginal) => {
 describe('WithdrawEth UI', () => {
   beforeEach(() => localStorage.clear());
 
-  it('정상 클릭 시 L2 트랜잭션 해시 저장', async () => {
+  it('should store L2 tx hash on valid click', async () => {
     renderWithProviders(<WithdrawEth />);
     const btn = await screen.findByRole('button', { name: t('nav_eth_withdraw') });
 

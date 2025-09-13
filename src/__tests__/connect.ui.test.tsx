@@ -8,7 +8,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { renderWithProviders } from '../../test/utils';
 
 describe('Connect component', () => {
-  it('연결 상태에서 주소 복사 버튼 동작', async () => {
+  it('should copy address when connected', async () => {
     const success = vi
       .spyOn(toaster, 'success')
       .mockImplementation((() => ({ id: 'toast' })) as any);

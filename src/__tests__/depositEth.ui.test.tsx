@@ -32,7 +32,7 @@ vi.mock('wagmi', async (importOriginal) => {
 });
 
 describe('DepositEth UI', () => {
-  it('정상 플로우: 버튼 클릭 → L1/L2 해시 노출', async () => {
+  it('should show L1/L2 hashes on click (happy path)', async () => {
     renderWithProviders(<DepositEth />);
     const btn = await screen.findByRole('button', { name: t('nav_eth_deposit') });
 

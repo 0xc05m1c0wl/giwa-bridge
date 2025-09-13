@@ -30,7 +30,7 @@ vi.mock('wagmi/actions', () => ({
 import { l1Public, l1Wallet, l2Public, l2Wallet } from '@lib/clients';
 
 describe('clients wrappers', () => {
-  it('l1/l2 public and wallet expose expected methods', async () => {
+  it('should expose expected methods (l1/l2 public and wallet)', async () => {
     const l1 = l1Public();
     const l2 = l2Public();
     const w1 = await l1Wallet();

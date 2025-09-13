@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { depositProgress, withdrawProgress } from '../lib/progress';
 
 describe('progress mapping', () => {
-  it('depositProgress maps statuses', () => {
+  it('should map statuses (depositProgress)', () => {
     expect(depositProgress('')).toBe(0);
     expect(depositProgress('Approving…')).toBe(25);
     expect(depositProgress('Depositing…')).toBe(50);
@@ -11,7 +11,7 @@ describe('progress mapping', () => {
     expect(depositProgress('Deposit completed ✅')).toBe(100);
   });
 
-  it('withdrawProgress maps statuses', () => {
+  it('should map statuses (withdrawProgress)', () => {
     expect(withdrawProgress('')).toBe(0);
     expect(withdrawProgress('Withdrawing…')).toBe(25);
     expect(withdrawProgress('L1에서 증명 가능 시점 대기…')).toBe(50);

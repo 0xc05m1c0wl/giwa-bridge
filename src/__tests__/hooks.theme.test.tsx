@@ -20,7 +20,7 @@ describe('useTheme', () => {
     document.documentElement.classList.remove('dark');
   });
 
-  it('토글 시 DOM 클래스/저장소 동기화', async () => {
+  it('should sync DOM class and storage on toggle', async () => {
     render(<ThemeProbe />);
     const btn = screen.getByRole('button', { name: 'toggle' });
 

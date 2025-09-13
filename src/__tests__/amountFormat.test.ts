@@ -2,7 +2,7 @@ import { sanitizeAmount } from '@lib/amountFormat';
 import { describe, expect, it } from 'vitest';
 
 describe('sanitizeAmount', () => {
-  it('keeps numbers and one dot, clamps decimals', () => {
+  it('should keep numbers and one dot, clamp decimals', () => {
     expect(sanitizeAmount('')).toBe('0');
     expect(sanitizeAmount('0')).toBe('0');
     expect(sanitizeAmount('.5')).toBe('0.5');

@@ -8,7 +8,7 @@ function Boom(): JSX.Element {
 }
 
 describe('AppProviders', () => {
-  it('ErrorBoundary가 오류를 잡아 기본 폴백을 표시', () => {
+  it('should capture error and show default fallback (ErrorBoundary)', () => {
     const err = vi.spyOn(console, 'error').mockImplementation(() => {});
 
     render(

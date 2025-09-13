@@ -10,7 +10,7 @@ describe('prefetch utils', () => {
     delete (window as any).requestIdleCallback;
   });
 
-  it('isPrefetchEnabled respects localStorage on/off and env', () => {
+  it('should respect localStorage on/off and env (isPrefetchEnabled)', () => {
     localStorage.setItem('prefetch', 'off');
     expect(isPrefetchEnabled()).toBe(false);
 
@@ -29,7 +29,7 @@ describe('prefetch utils', () => {
     import.meta.env = prev;
   });
 
-  it('shouldSkipByNetwork checks saveData/effectiveType', () => {
+  it('should check saveData/effectiveType (shouldSkipByNetwork)', () => {
     // @ts-expect-error jsdom mock
     (navigator as any).connection = { saveData: true };
     expect(shouldSkipByNetwork()).toBe(true);
@@ -43,7 +43,7 @@ describe('prefetch utils', () => {
     expect(shouldSkipByNetwork()).toBe(false);
   });
 
-  it('runIdle uses requestIdleCallback when available, otherwise setTimeout', async () => {
+  it('should use requestIdleCallback when available, otherwise setTimeout (runIdle)', async () => {
     vi.useFakeTimers();
     const cb = vi.fn();
 

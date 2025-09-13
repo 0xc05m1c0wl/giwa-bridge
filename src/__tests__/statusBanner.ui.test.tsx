@@ -15,14 +15,14 @@ vi.mock('wagmi', async (importOriginal) => {
 });
 
 describe('StatusBanner', () => {
-  it('Deposit 경로에서 Sepolia 전환 메시지 노출', async () => {
+  it('should show Sepolia switch message on Deposit route', async () => {
     renderWithProviders(<StatusBanner />, { route: '/deposit' });
     expect(
       await screen.findByText(/Sepolia 전환 필요|Please switch to Sepolia/),
     ).toBeInTheDocument();
   });
 
-  it('Withdraw 경로에서 GIWA 전환 메시지 노출', async () => {
+  it('should show GIWA switch message on Withdraw route', async () => {
     renderWithProviders(<StatusBanner />, { route: '/withdraw' });
     expect(await screen.findByText(/GIWA 전환 필요|Please switch to GIWA/)).toBeInTheDocument();
   });

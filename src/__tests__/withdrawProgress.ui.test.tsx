@@ -32,7 +32,7 @@ describe('WithdrawProgress UI', () => {
     localStorage.clear();
   });
 
-  it('잘못된 해시 입력 시 토스트 에러', async () => {
+  it('should show toast error for invalid hash input', async () => {
     const spy = vi.spyOn(toaster, 'error').mockImplementation((() => ({ id: 'toast' })) as any);
 
     renderWithProviders(<WithdrawProgress />);
@@ -49,7 +49,7 @@ describe('WithdrawProgress UI', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('정상 플로우: prove → finalized', async () => {
+  it('should go from prove to finalized (happy path)', async () => {
     renderWithProviders(<WithdrawProgress />);
     const input = await screen.findByLabelText(t('label_l2_withdraw_hash'));
 

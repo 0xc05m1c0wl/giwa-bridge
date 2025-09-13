@@ -22,7 +22,7 @@ function Probe({
 }
 
 describe('useTimeTexts', () => {
-  it('경과/업데이트 텍스트 계산', async () => {
+  it('should compute elapsed/updated texts', async () => {
     vi.useFakeTimers();
     const now = Date.now();
 

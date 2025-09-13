@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { type Toast, toaster } from '../lib/toaster';
 
 describe('errors', () => {
-  it('handleErrorToast publishes toaster error', () => {
+  it('should publish toaster error (handleErrorToast)', () => {
     let last: Toast | undefined;
     const unsub = toaster.subscribe((t) => {
       last = t;
